@@ -19,14 +19,14 @@ class GameScene extends Phaser.Scene {
   create() {
     this.createBlocks();
 
-    this.paddle = this.physics.add.image(400, 550, Assets.board_name).setImmovable(true);
+    this.paddle = this.physics.add.image(200, 550, Assets.board_name).setImmovable(true);
     this.paddle.body.allowGravity = false;
 
     // ボールを作成
-    this.ball = this.physics.add.image(400, 500, Assets.ball_name);
+    this.ball = this.physics.add.image(200, 500, Assets.ball_name);
     this.ball.setCollideWorldBounds(true); // 画面の端で跳ね返る
     this.ball.setBounce(1);                // ボールが壁やパドルに当たると反射する
-    this.ball.setVelocity(200, 200);       // ボールに初期速度を与える
+    this.ball.setVelocity(0, 200);       // ボールに初期速度を与える
 
     // パドルとボールの衝突処理
     this.physics.add.collider(this.ball, this.paddle, this.hitPaddle, undefined, this);
@@ -52,9 +52,9 @@ class GameScene extends Phaser.Scene {
     // ブロックの設定
     const blockWidth = 64;  // 1つのブロックの幅
     const blockHeight = 32; // 1つのブロックの高さ
-    const cols = 11;        // ブロックの列数
+    const cols = 5;        // ブロックの列数
     const rows = 5;         // ブロックの行数
-    const offsetX = 48 + 32;    // 左側の余白
+    const offsetX = 40 + 32;    // 左側の余白
     const offsetY = 50;     // 上側の余白
     const spacing = 0;     // ブロック間のスペース
 
@@ -98,8 +98,8 @@ class GameScene extends Phaser.Scene {
   }
 
   private resetBall(): void {
-    this.ball.setPosition(400, 500);
-    this.ball.setVelocity(200, 200);
+    this.ball.setPosition(200, 500);
+    this.ball.setVelocity(0, 200);
  }
 
   private hitBlock(
@@ -112,7 +112,7 @@ class GameScene extends Phaser.Scene {
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
-  width: 800,
+  width: 400,
   height: 600,
   parent: 'app',
   physics: {
